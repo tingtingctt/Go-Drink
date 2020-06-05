@@ -37,7 +37,7 @@ module.exports = function(sequelize, DataTypes) {
   priceRange : {
     [Op.or]: [{
       from: {
-          [Op.between]: [0, 10]
+          [Op.between]: [minprice, maxprice]
       }
   },{
     from: {
@@ -51,7 +51,6 @@ module.exports = function(sequelize, DataTypes) {
 
   },
   });
-};
 
   Business.associate = function(models) {
     // We're saying that a Post should belong to an Author
