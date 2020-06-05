@@ -89,8 +89,8 @@ html, body {
 
 @keyframes dance {
     0% {transform: rotateY(45deg) skewX(0deg) translate(0, -10%);}
-    25% {transform: rotateY(80deg) skewX(40deg) translate(0, 10%);}
-    50% {transform: rotateY(20deg) skewX(-20deg) translate(0, -5%); }
-    75% {transform: rotateY(-45deg) skewX(-30deg) translate(0, 15%); }
-    100% {transform: rotateY(-20deg) skewX(-10deg) translate(0, 1%); }
+    25% {transform: rotateY(-60deg) skewX(10deg) translate(0, 10%);}
+    50% {transform: rotateY(20deg) skewX(-5deg) translate(0, -5%); }
+    75% {transform: rotateY(-45deg) skewX(5deg) translate(0, 15%); }
+    100% {transform: rotateY(-20deg) skewX(-5deg) translate(0, 1%); }
 }
