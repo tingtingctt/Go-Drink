@@ -40,6 +40,13 @@ html, body {
     z-index: 2;
 }
 
+#beachOn {
+    position: fixed;
+    top: 95%;
+    left: 85%;
+    z-index: 2;
+}
+
 #partyOff {
     position: fixed;
     top: 95%;
