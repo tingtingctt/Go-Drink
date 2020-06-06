@@ -1,54 +1,42 @@
 module.exports = function(sequelize, DataTypes) {
   var Business = sequelize.define("Business", {
     location_id: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       primaryKey: true
    },
    location_code: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: true
    },
    location_name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: true
    },
    latitude: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: true,
       defaultValue: null
    },
    longitude: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: true,
       defaultValue: null
    },
    location: {
-      type: Sequelize.GEOMETRY('POINT'),
+      type: DataTypes.GEOMETRY('POINT'),
       allowNull: true
    },
    reveiws: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: true
  },
   age : {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: true
   },
   priceRange : {
-    [Op.or]: [{
-      from: {
-          [Op.between]: [minprice, maxprice]
-      }
-  },{
-    from: {
-          [Op.between]: [11, 15]
-    }
-  }, {
-      from: {
-          [Op.between]: [16, 30]
-      }
-  }]
-
+    type: DataTypes.STRING,
+    allowNull: true
   },
   });
 
