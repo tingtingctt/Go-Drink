@@ -15,13 +15,19 @@ html, body {
     top: 10px;
 }
 
+#drop {
+    position: fixed;
+    left: 40%;
+    top: 10px;
+}
+
 
 #canvas {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
-    display: block;
+    display: none;
     /* position: fixed;
     left: 0;
     top: 0; */
