@@ -1,18 +1,30 @@
 var map, infoWindow, pos;
-// var markers = [];
+// var user;
+
+var user = {
+  name: "Sailor Moon",
+  email: "s@s.com",
+  preference: "jazz"
+}
 
 $(document).ready(function () {
-  // $.get("/api/user/:id").then(function(data) {
+    // $.get("/api/venues").then(function(data) {
   //   for (i=0; i<data.length; i++){
-  //     markers.push(data[i])
+  //     all.push(data[i])
   //   }
   // });
+
+  // $.get("/api/user/:id").then(function(data) {
+  //     user = data;
+  // });
+
   initMap();
-  dropMarkers();
-})
+  defaultMarkers();
+});
 
+var markers = [];
 
-var markers = [
+var all = [
   {
     name: "Exchange LA",
     type: "nightclub",
@@ -45,6 +57,9 @@ var markers = [
   },
 ];
 
+// var beverlyHills = {lat: 34.063900, lng: -118.360200};
+// var space = { lat: 29.5602853, lng: -95.0853914 };
+
 var icons = {
   jazz: {
     icon: "TT_images/jazz.png"
@@ -56,15 +71,6 @@ var icons = {
     icon: "TT_images/cafe.png"
   }
 };
-
-// var beverlyHills = {lat: 34.063900, lng: -118.360200};
-// var exchangeLA = { lat: 34.0453, lng: -118.2513 };
-// var academyLA = { lat: 34.1020, lng: -118.3209 };
-// var vibratoJazz = { lat: 34.127257, lng: -118.4457937 };
-// var blueWhaleJazz = { lat: 34.0499, lng: -118.2421 };
-// var pipsJazz = { lat: 34.0485, lng: -118.3442 };
-// var space = { lat: 29.5602853, lng: -95.0853914 };
-// var beachCafe = { lat: 34.0157309, lng: -118.5015921 };
 
 
 
@@ -192,8 +198,6 @@ function initMap() {
 
 }
 
-
-
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
@@ -204,21 +208,50 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 
 
-function dropMarkers(){
-  for (i=0; i<markers.length; i++){
-    var venue = new google.maps.Marker({
-      position: markers[i].coords,
-      map: map,
-      icon: icons[markers[i].type].icon});
-      
-      google.maps.event.addListener(venue, 'click', function () {
-        // infowindow.setContent(markers[i].name);
-        // infowindow.open(map, this);
-          // panorama(markers[i].coords);
-          console.log(markers[i].name);
-      });
+
+function dropAll() {
+  clearMarkers();
+  for (var i = 0; i < all.length; i++) {
+    addMarkerWithTimeout(all[i], i * 200);
   }
 }
+
+function addMarkerWithTimeout(venue, timeout) {
+  window.setTimeout(function() {
+    markers.push(new google.maps.Marker({
+      position: venue.coords,
+      map: map,
+      icon: icons[venue.type].icon,
+      animation: google.maps.Animation.DROP
+    }));
+  }, timeout);
+}
+
+function clearMarkers() {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  markers = [];
+}
+
+
+
+
+function defaultMarkers(){
+  for (i=0; i<all.length; i++){
+    if (user.preference === all[i].type){
+      addMarkerWithTimeout(all[i], i * 200);
+        
+      // google.maps.event.addListener(markers[markers.length-1], 'click', function () {
+      //   // infowindow.setContent(all[i].name);
+      //   // infowindow.open(map, this);
+      //     // panorama(all[i].coords);
+      //     console.log(all[i].name);
+      // });
+    }
+  }
+}
+
 
 
 
@@ -228,10 +261,7 @@ function calculateAndDisplayRoute() {
   directionsRenderer.setMap(map);
   directionsService.route(
       {
-        // origin: {query: "academy LA"},
-        // origin: {lat: 34.063900, lng: -118.360200},
         origin: pos,
-        // destination: {query: "bluewhale"},
         destination: {lat: 34.1020, lng: -118.3209},
         travelMode: 'DRIVING'
       },
@@ -249,7 +279,6 @@ function calculateAndDisplayRoute() {
 function panorama(location) {
   $("#map").attr("style", "display:none");
   $("#street-view").attr("style", "display:block");
-  // $("#club").attr("style", "display:block");
   var panorama;
   panorama = new google.maps.StreetViewPanorama(
     document.getElementById('street-view'),
@@ -268,6 +297,7 @@ $("#direction").on("click", function () {
 
 
 $("#cheesy").on("click", function () {
+  $("#canvas").attr("style", "display:block");
   daisy();
 });
 
@@ -277,12 +307,12 @@ $("#partyOn").on("click", function () {
 });
 
 $("#beachOn").on("click", function () {
-  // $("#club").attr("style", "display:block");
   $("#avatar").attr("src", "TT_images/beach.gif");
 });
 
 $("#partyOff").on("click", function () {
   $("#club").attr("style", "display:none");
+  $("#canvas").attr("style", "display:none");
   $("#avatar").attr("style", "animation:none");
   $("#avatar").attr("src", "TT_images/sailor-moon.gif");
 })
@@ -340,43 +370,31 @@ $("#partyOff").on("click", function () {
 
 var ctx;
 var imgDrops;
-// var imgBg;
 var x = 0;
 var y = 0;
 var noOfDrops = 10;
 var fallingDrops = [];
 var canvas = document.querySelector("#canvas");
 
-
-// function drawBackground() {
-//     ctx.drawImage(imgBg, 0, 0, window.innerWidth, window.innerHeight); //Background
-//   }
-
 function draw() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    // drawBackground();
     for (var i=0; i< noOfDrops; i++){
-        ctx.drawImage (fallingDrops[i].image, fallingDrops[i].x, fallingDrops[i].y); //The rain drop
-        fallingDrops[i].y += fallingDrops[i].speed; //Set the falling speed
-        if (fallingDrops[i].y > window.innerHeight + 70) {  //Repeat the raindrop when it falls out of view
-            fallingDrops[i].y = -70 //Account for the image size
-            fallingDrops[i].x = Math.random() * window.innerWidth;    //Make it appear randomly along the width    
+        ctx.drawImage (fallingDrops[i].image, fallingDrops[i].x, fallingDrops[i].y); 
+        fallingDrops[i].y += fallingDrops[i].speed; 
+        if (fallingDrops[i].y > window.innerHeight + 70) { 
+            fallingDrops[i].y = -70 
+            fallingDrops[i].x = Math.random() * window.innerWidth;   
         }
     }
 }
-
 
 function daisy() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     if (canvas.getContext) {
         ctx = canvas.getContext('2d');
-
-        // imgBg = new Image();
-        // imgBg.width = window.innerWidth;
-        // imgBg.src = "/assets/image/devour.png";
 
         setInterval(draw, 36);
 
