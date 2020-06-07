@@ -16,6 +16,18 @@ html, body {
 }
 
 
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: block;
+    /* position: fixed;
+    left: 0;
+    top: 0; */
+}
+
+
 #street-view {
     height: 100%;
     display: none;
@@ -53,10 +65,18 @@ html, body {
     z-index: 2;
 }
 
-#partyOff {
+
+#cheesy {
     position: fixed;
     top: 95%;
     left: 60px;
+    z-index: 2;
+}
+
+#partyOff {
+    position: fixed;
+    top: 95%;
+    left: 80px;
     z-index: 2;
 }
 
