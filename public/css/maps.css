@@ -9,6 +9,12 @@ html, body {
     padding: 0;
 }
 
+#direction {
+    position: fixed;
+    left: 50%;
+    top: 10px;
+}
+
 
 #street-view {
     height: 100%;
