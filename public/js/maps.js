@@ -1,8 +1,15 @@
-var map, infoWindow;
+var map, infoWindow, pos;
+// var markers = [];
 
 $(document).ready(function () {
+  // $.get("/api/user/:id").then(function(data) {
+  //   for (i=0; i<data.length; i++){
+  //     markers.push(data[i])
+  //   }
+  // });
   initMap();
-  dropMarkers()
+  dropMarkers();
+  calculateAndDisplayRoute();
 })
 
 
@@ -161,7 +168,7 @@ function initMap() {
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
-      var pos = {
+      pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
@@ -181,10 +188,12 @@ function initMap() {
     });
 
   } else {
-    // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
+
 }
+
+
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
@@ -195,34 +204,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 
-  // place search + click event
-  //   var request = {
-  //     query: 'Museum of Contemporary Art Australia',
-  //     fields: ['name', 'geometry'],
-  //   };
-
-  //   service = new google.maps.places.PlacesService(map);
-
-  //   service.findPlaceFromQuery(request, function(results, status) {
-  //     if (status === google.maps.places.PlacesServiceStatus.OK) {
-  //       for (var i = 0; i < results.length; i++) {
-  //         createMarker(results[i]);
-  //       }
-
-  //       map.setCenter(results[0].geometry.location);
-  //     }
-  //   });
-  // }
-  //   function createMarker(place) {
-  //   var marker = new google.maps.Marker({
-  //     map: map,
-  //     position: place.geometry.location
-  //   });
-
-  // google.maps.event.addListener(marker, 'click', function() {
-  //   infowindow.setContent(place.name);
-  //   infowindow.open(map, this);
-  // });
 
 function dropMarkers(){
   for (i=0; i<markers.length; i++){
@@ -242,20 +223,28 @@ function dropMarkers(){
 
 
 
+function calculateAndDisplayRoute() {
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
+  directionsRenderer.setMap(map);
+  directionsService.route(
+      {
+        // origin: {query: "academy LA"},
+        origin: {lat: 34.063900, lng: -118.360200},
+        // destination: {query: "bluewhale"},
+        destination: {lat: 34.1020, lng: -118.3209},
+        travelMode: 'DRIVING'
+      },
+      function(response, status) {
+        if (status === 'OK') {
+          directionsRenderer.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+}
 
-// function dropMarker (){
-//   var club = new google.maps.Marker({
-//    position: academyLA,
-//    map: map,
-//    icon: "TT_images/disco.png"
-//  });
 
-// google.maps.event.addListener(club, 'click', function () {
-//    // infowindow.setContent(place.name);
-//    // infowindow.open(map, this);
-//      panorama();
-//  });
-// } 
 
 function panorama(location) {
   $("#map").attr("style", "display:none");
@@ -287,3 +276,52 @@ $("#partyOff").on("click", function () {
   $("#avatar").attr("style", "animation:none");
   $("#avatar").attr("src", "TT_images/sailor-moon.gif");
 })
+
+
+
+
+
+// function dropMarker (){
+//   var club = new google.maps.Marker({
+//    position: academyLA,
+//    map: map,
+//    icon: "TT_images/disco.png"
+//  });
+
+// google.maps.event.addListener(club, 'click', function () {
+//    // infowindow.setContent(place.name);
+//    // infowindow.open(map, this);
+//      panorama();
+//  });
+// } 
+
+
+
+  // place search + click event
+  //   var request = {
+  //     query: 'Museum of Contemporary Art Australia',
+  //     fields: ['name', 'geometry'],
+  //   };
+
+  //   service = new google.maps.places.PlacesService(map);
+
+  //   service.findPlaceFromQuery(request, function(results, status) {
+  //     if (status === google.maps.places.PlacesServiceStatus.OK) {
+  //       for (var i = 0; i < results.length; i++) {
+  //         createMarker(results[i]);
+  //       }
+
+  //       map.setCenter(results[0].geometry.location);
+  //     }
+  //   });
+  // }
+  //   function createMarker(place) {
+  //   var marker = new google.maps.Marker({
+  //     map: map,
+  //     position: place.geometry.location
+  //   });
+
+  // google.maps.event.addListener(marker, 'click', function() {
+  //   infowindow.setContent(place.name);
+  //   infowindow.open(map, this);
+  // });
