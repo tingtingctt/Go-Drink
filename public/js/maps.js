@@ -6,15 +6,59 @@ $(document).ready(function () {
 })
 
 
-var beverlyHills = {lat: 34.063900, lng: -118.360200};
-var exchangeLA = { lat: 34.0453, lng: -118.2513 };
-var berkeley = { lat: 37.869085, lng: -122.254775 };
-var academyLA = { lat: 34.1020, lng: -118.3209 };
-var vibratoJazz = { lat: 34.127257, lng: -118.4457937 };
-var blueWhaleJazz = { lat: 34.0499, lng: -118.2421 };
-var pipsJazz = { lat: 34.0485, lng: -118.3442 };
-var space = { lat: 29.5602853, lng: -95.0853914 };
-var beach = { lat: 34.0157309, lng: -118.5015921 };
+var markers = [
+  {
+    name: "Exchange LA",
+    type: "nightclub",
+    coords: {lat: 34.063900, lng: -118.360200},
+  },
+  {
+    name: "Academy LA",
+    type: "nightclub",
+    coords: { lat: 34.1020, lng: -118.3209 },
+  },
+  {
+    name: "Vibrato Grill Jazz",
+    type: "jazz",
+    coords: { lat: 34.127257, lng: -118.4457937 },
+  },
+  {
+    name: "BlueWhale",
+    type: "jazz",
+    coords: { lat: 34.0499, lng: -118.2421 },
+  },
+  {
+    name: "Pips On Labrea",
+    type: "jazz",
+    coords: { lat: 34.0485, lng: -118.3442 },
+  },
+  {
+    name: "Perry's Beach Cafe",
+    type: "cafe",
+    coords: { lat: 34.0157309, lng: -118.5015921 },
+  },
+];
+
+var icons = {
+  jazz: {
+    icon: "TT_images/jazz.png"
+  },
+  nightclub: {
+    icon: "TT_images/nightclub.png"
+  },
+  cafe: {
+    icon: "TT_images/cafe.png"
+  }
+};
+
+// var beverlyHills = {lat: 34.063900, lng: -118.360200};
+// var exchangeLA = { lat: 34.0453, lng: -118.2513 };
+// var academyLA = { lat: 34.1020, lng: -118.3209 };
+// var vibratoJazz = { lat: 34.127257, lng: -118.4457937 };
+// var blueWhaleJazz = { lat: 34.0499, lng: -118.2421 };
+// var pipsJazz = { lat: 34.0485, lng: -118.3442 };
+// var space = { lat: 29.5602853, lng: -95.0853914 };
+// var beachCafe = { lat: 34.0157309, lng: -118.5015921 };
 
 
 
@@ -59,12 +103,14 @@ function initMap() {
       {
         featureType: 'road',
         elementType: 'geometry.stroke',
-        stylers: [{ color: '#212a37' }]
+        stylers: [{ visibility: 'off' }]
+        // stylers: [{ color: '#212a37' }]
       },
       {
         featureType: 'road',
         elementType: 'labels.text.fill',
-        stylers: [{ color: '#9ca5b3' }]
+        stylers: [{ visibility: 'off' }]
+        // stylers: [{ color: '#9ca5b3' }]
       },
       {
         featureType: 'road.highway',
@@ -74,12 +120,14 @@ function initMap() {
       {
         featureType: 'road.highway',
         elementType: 'geometry.stroke',
-        stylers: [{ color: '#1f2835' }]
+        // stylers: [{ color: '#1f2835' }]
+        stylers: [{ visibility: 'off' }]
       },
       {
         featureType: 'road.highway',
         elementType: 'labels.text.fill',
-        stylers: [{ color: '#f3d19c' }]
+        stylers: [{ visibility: 'off' }]
+        // stylers: [{ color: '#f3d19c' }]
       },
       {
         featureType: 'transit',
@@ -176,23 +224,40 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   //   infowindow.open(map, this);
   // });
 
-
-
 function dropMarkers(){
-  var club = new google.maps.Marker({
-   position: academyLA,
-   map: map,
-   icon: "TT_images/disco.png"
- });
-google.maps.event.addListener(club, 'click', function () {
-   // infowindow.setContent(place.name);
-   // infowindow.open(map, this);
-     panorama();
- });
-} 
+  for (i=0; i<markers.length; i++){
+    var venue = new google.maps.Marker({
+      position: markers[i].coords,
+      map: map,
+      icon: icons[markers[i].type].icon});
+      
+      google.maps.event.addListener(venue, 'click', function () {
+        // infowindow.setContent(markers[i].name);
+        // infowindow.open(map, this);
+          // panorama(markers[i].coords);
+          console.log(markers[i].name);
+      });
+  }
+}
 
 
-function panorama() {
+
+
+// function dropMarker (){
+//   var club = new google.maps.Marker({
+//    position: academyLA,
+//    map: map,
+//    icon: "TT_images/disco.png"
+//  });
+
+// google.maps.event.addListener(club, 'click', function () {
+//    // infowindow.setContent(place.name);
+//    // infowindow.open(map, this);
+//      panorama();
+//  });
+// } 
+
+function panorama(location) {
   $("#map").attr("style", "display:none");
   $("#street-view").attr("style", "display:block");
   // $("#club").attr("style", "display:block");
@@ -200,7 +265,7 @@ function panorama() {
   panorama = new google.maps.StreetViewPanorama(
     document.getElementById('street-view'),
     {
-      position: beach,
+      position: location,
       pov: { heading: 165, pitch: 0 },
       zoom: 1
     });
