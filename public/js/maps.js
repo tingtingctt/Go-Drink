@@ -9,7 +9,6 @@ $(document).ready(function () {
   // });
   initMap();
   dropMarkers();
-  calculateAndDisplayRoute();
 })
 
 
@@ -230,7 +229,8 @@ function calculateAndDisplayRoute() {
   directionsService.route(
       {
         // origin: {query: "academy LA"},
-        origin: {lat: 34.063900, lng: -118.360200},
+        // origin: {lat: 34.063900, lng: -118.360200},
+        origin: pos,
         // destination: {query: "bluewhale"},
         destination: {lat: 34.1020, lng: -118.3209},
         travelMode: 'DRIVING'
@@ -259,6 +259,12 @@ function panorama(location) {
       zoom: 1
     });
 }
+
+
+
+$("#direction").on("click", function () {
+  calculateAndDisplayRoute();
+});
 
 
 $("#partyOn").on("click", function () {
