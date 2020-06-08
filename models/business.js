@@ -1,43 +1,45 @@
 module.exports = function(sequelize, DataTypes) {
   var Business = sequelize.define("Business", {
-    location_id: {
+    name: {
       type: DataTypes.STRING,
       primaryKey: true
    },
-   location_code: {
+    type: {
       type: DataTypes.STRING,
       allowNull: true
    },
-   location_name: {
+    address: {
       type: DataTypes.STRING,
       allowNull: true
    },
-   latitude: {
-      type: DataTypes.STRING,
+   lat: {
+      type: DataTypes.DOUBLE(10,6),
       allowNull: true,
-      defaultValue: null
+      // defaultValue: null
    },
-   longitude: {
-      type: DataTypes.STRING,
+   lng: {
+      type: DataTypes.DOUBLE(10,6),
       allowNull: true,
-      defaultValue: null
+      // defaultValue: null
    },
-   location: {
-      type: DataTypes.GEOMETRY('POINT'),
-      allowNull: true
-   },
-   reviews: {
-    type: DataTypes.STRING,
-    allowNull: true
- },
-  age : {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  priceRange : {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
+//    location: {
+//       type: DataTypes.GEOMETRY('POINT'),
+//       allowNull: true
+//    },
+//    reviews: {
+//     type: DataTypes.STRING,
+//     allowNull: true
+//  },
+//   age : {
+//     type: DataTypes.STRING,
+//     allowNull: true
+//   },
+//   priceRange : {
+//     type: DataTypes.STRING,
+//     allowNull: true
+//   },
+  },{
+    timestamps: false
   });
 
   Business.associate = function(models) {
