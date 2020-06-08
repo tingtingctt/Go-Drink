@@ -206,24 +206,36 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
+$(document).on('click', ".pano", function(){
+  panorama(all[$(this).parent('div').attr("id")].coords)
+})
 
+$(document).on('click', ".directions", function(){
+  calculateAndDisplayRoute(all[$(this).parent('div').attr("id")].coords)
+})
 
 
 function dropAll() {
   clearMarkers();
   for (var i = 0; i < all.length; i++) {
-    addMarkerWithTimeout(all[i], i * 200);
+    addMarkerWithTimeout({...all[i],i}, i * 200);
   }
 }
 
 function addMarkerWithTimeout(venue, timeout) {
+  console.log(venue)
   window.setTimeout(function() {
-    markers.push(new google.maps.Marker({
+    const newMarker = new google.maps.Marker({
       position: venue.coords,
       map: map,
       icon: icons[venue.type].icon,
       animation: google.maps.Animation.DROP
-    }));
+    })
+    google.maps.event.addListener(newMarker, "click", function(){
+      infoWindow.setContent(`<div id=${venue.i}><h1 id='title'>position - ${newMarker.position}\n name - ${venue.name} \n type - ${venue.type}</h1><button class='btn btn-primary btn-lg pano'>TELEPORT</button><button class='btn btn-primary btn-lg directions'>Directions</button></div>`);
+      infoWindow.open(map,newMarker)
+    })
+    markers.push(newMarker);
   }, timeout);
 }
 
@@ -240,7 +252,7 @@ function clearMarkers() {
 function defaultMarkers(){
   for (i=0; i<all.length; i++){
     if (user.preference === all[i].type){
-      addMarkerWithTimeout(all[i], i * 200);
+      addMarkerWithTimeout({...all[i],i}, i * 200);
         
       // google.maps.event.addListener(markers[markers.length-1], 'click', function () {
       //   // infowindow.setContent(all[i].name);
@@ -255,14 +267,14 @@ function defaultMarkers(){
 
 
 
-function calculateAndDisplayRoute() {
+function calculateAndDisplayRoute(destination = {lat: 34.1020, lng: -118.3209}) {
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer = new google.maps.DirectionsRenderer();
   directionsRenderer.setMap(map);
   directionsService.route(
       {
         origin: pos,
-        destination: {lat: 34.1020, lng: -118.3209},
+        destination,
         travelMode: 'DRIVING'
       },
       function(response, status) {
