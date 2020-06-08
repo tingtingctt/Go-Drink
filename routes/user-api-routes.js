@@ -40,10 +40,20 @@ module.exports = function(app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id
+        id: req.user.id,
+        // preference: req.user.preference
       });
     }
   });
+  app.get("/api/user", function(req,res){
+    db.User.findOne({
+      where:{
+        email:req.user.email
+      }
+    }).then(function(result){
+      res.json(result);
+    })
+  })
 };
 
 
