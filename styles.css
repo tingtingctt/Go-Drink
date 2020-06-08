@@ -1,0 +1,76 @@
+.container-fluid {
+
+    padding-bottom: 20px;
+    background-image: url("https://www.artistphotographer.com/wp-content/uploads/2015/06/black-high-resolution.jpg");
+}
+
+.header {
+    padding-top: 15px;
+    font-size: 50px;
+    font-family: 'Lexend Tera', sans-serif;
+    color: darkorange;
+    text-align: center;
+
+}
+
+.cocktail {
+
+    padding-bottom: 20px;
+
+}
+
+@media only screen and (max-width: 1026px) {
+.cocktail {
+    display: none;
+}
+}
+
+.signUp {
+
+    vertical-align: middle;
+    border: darkorange 3px;
+    border-style: solid;
+    border-radius: 15px;
+    margin: 20px 40px;
+    text-align: center;
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: 'Lexend Tera', sans-serif;
+    height: 7em;
+    width: 7em;
+    padding-top: 1.5em;
+}
+
+@media only screen and (max-width: 1026px) {
+    .signUp {
+        margin: 10px 10px;
+        padding-top: 5px;
+        font-size: 15px;
+    }
+    }
+
+    @media only screen and (max-width: 715px) {
+        .signUp {
+            margin: 10px 10px;
+            padding-top: 0px;
+            font-size: 10px;
+        }
+        }
+
+
+.messages {
+
+    text-align: center;
+    color: whitesmoke;
+    font-family: cursive;
+    letter-spacing: 3px;
+    font-size: 25px;
+    padding-top: 5px;
+    margin-bottom: 0;
+
+}
+
+.bar{
+
+    margin: 0 auto;
+}
