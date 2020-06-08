@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.GEOMETRY('POINT'),
       allowNull: true
    },
-   reveiws: {
+   reviews: {
     type: DataTypes.STRING,
     allowNull: true
  },
