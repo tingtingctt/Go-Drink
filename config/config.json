@@ -15,10 +15,10 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "Godo",
-    "host": "127.0.0.1",
+    "username": "si8p43ox0p3e0wyl",
+    "password": "wnhcc3zo1gjkvoyz",
+    "database": "b64q7no7dq3knyrs",
+    "host": "sq65ur5a5bj7flas.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql",
     "operatorsAliases": false
   }
