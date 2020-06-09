@@ -1,6 +1,6 @@
 SELECT * FROM godo.Businesses;
 USE godo;
-INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Exchange LA","nightclub","618 S Spring St, Los Angeles, CA 90014",34.063900,-118.360200,1)
+INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Exchange LA","nightclub","618 S Spring St, Los Angeles, CA 90014",34.063900,-118.360200,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Academy LA","nightclub","618 S Spring St, Los Angeles, CA 90014",34.1020,-118.3209,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Vibrato Grill Jazz","jazz","618 S Spring St, Los Angeles, CA 90014",34.127257,-118.4457937,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("BlueWhale","jazz","618 S Spring St, Los Angeles, CA 90014",34.0499,-118.2421 ,1);
