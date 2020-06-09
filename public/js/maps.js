@@ -73,7 +73,7 @@ var icons = {
 };
 
 
-
+// initiate styled map
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
@@ -206,22 +206,9 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
-$(document).on('click', ".pano", function(){
-  panorama(all[$(this).parent('div').attr("id")].coords)
-})
-
-$(document).on('click', ".directions", function(){
-  calculateAndDisplayRoute(all[$(this).parent('div').attr("id")].coords)
-})
 
 
-function dropAll() {
-  clearMarkers();
-  for (var i = 0; i < all.length; i++) {
-    addMarkerWithTimeout({...all[i],i}, i * 200);
-  }
-}
-
+// drop markers
 function addMarkerWithTimeout(venue, timeout) {
   console.log(venue)
   window.setTimeout(function() {
@@ -247,27 +234,51 @@ function clearMarkers() {
   markers = [];
 }
 
-
-
-
 function defaultMarkers(){
   for (i=0; i<all.length; i++){
     if (user.preference === all[i].type){
       addMarkerWithTimeout({...all[i],i}, i * 200);
-        
-      // google.maps.event.addListener(markers[markers.length-1], 'click', function () {
-      //   // infowindow.setContent(all[i].name);
-      //   // infowindow.open(map, this);
-      //     // panorama(all[i].coords);
-      //     console.log(all[i].name);
-      // });
+    }
+  }
+}
+
+function dropAll() {
+  clearMarkers();
+  for (var i = 0; i < all.length; i++) {
+    addMarkerWithTimeout({...all[i],i}, i * 200);
+  }
+}
+
+function dropNightclub(){
+  clearMarkers();
+  for (i=0; i<all.length; i++){
+    if (all[i].type === "nightclub"){
+      addMarkerWithTimeout({...all[i],i}, i * 200);
+    }
+  }
+}
+
+function dropJazz(){
+  clearMarkers();
+  for (i=0; i<all.length; i++){
+    if (all[i].type === "jazz"){
+      addMarkerWithTimeout({...all[i],i}, i * 200);
+    }
+  }
+}
+
+function dropCafe(){
+  clearMarkers();
+  for (i=0; i<all.length; i++){
+    if (all[i].type === "cafe"){
+      addMarkerWithTimeout({...all[i],i}, i * 200);
     }
   }
 }
 
 
 
-
+// directions
 function calculateAndDisplayRoute(destination = {lat: 34.1020, lng: -118.3209}) {
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -289,6 +300,7 @@ function calculateAndDisplayRoute(destination = {lat: 34.1020, lng: -118.3209}) 
 
 
 
+// teleport
 function panorama(location) {
   $("#map").attr("style", "display:none");
   $("#street-view").attr("style", "display:block");
@@ -303,21 +315,22 @@ function panorama(location) {
 }
 
 
+// back to maps
 function back(){
     $("#map").attr("style", "display:block");
     $("#street-view").attr("style", "display:none");
 }
 
-// $("#back").on("click", function () {
-//   $("#map").attr("style", "display:block");
-//   $("#street-view").attr("style", "display:none");
-// });
 
 
-$("#direction").on("click", function () {
-  calculateAndDisplayRoute();
+// onclick events
+$(document).on('click', ".pano", function(){
+  panorama(all[$(this).parent('div').attr("id")].coords)
 });
 
+$(document).on('click', ".directions", function(){
+  calculateAndDisplayRoute(all[$(this).parent('div').attr("id")].coords)
+});
 
 $("#cheesy").on("click", function () {
   $("#canvas").attr("style", "display:block");
@@ -342,55 +355,7 @@ $("#partyOff").on("click", function () {
 
 
 
-
-
-// function dropMarker (){
-//   var club = new google.maps.Marker({
-//    position: academyLA,
-//    map: map,
-//    icon: "TT_images/disco.png"
-//  });
-
-// google.maps.event.addListener(club, 'click', function () {
-//    // infowindow.setContent(place.name);
-//    // infowindow.open(map, this);
-//      panorama();
-//  });
-// } 
-
-
-
-  // place search + click event
-  //   var request = {
-  //     query: 'Museum of Contemporary Art Australia',
-  //     fields: ['name', 'geometry'],
-  //   };
-
-  //   service = new google.maps.places.PlacesService(map);
-
-  //   service.findPlaceFromQuery(request, function(results, status) {
-  //     if (status === google.maps.places.PlacesServiceStatus.OK) {
-  //       for (var i = 0; i < results.length; i++) {
-  //         createMarker(results[i]);
-  //       }
-
-  //       map.setCenter(results[0].geometry.location);
-  //     }
-  //   });
-  // }
-  //   function createMarker(place) {
-  //   var marker = new google.maps.Marker({
-  //     map: map,
-  //     position: place.geometry.location
-  //   });
-
-  // google.maps.event.addListener(marker, 'click', function() {
-  //   infowindow.setContent(place.name);
-  //   infowindow.open(map, this);
-  // });
-
-
-
+// canvas
 var ctx;
 var imgDrops;
 var x = 0;

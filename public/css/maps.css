@@ -9,15 +9,27 @@ html, body {
     padding: 0;
 }
 
-/* #direction {
+#drop-all {
     position: fixed;
-    left: 50%;
+    left: 200px;
     top: 10px;
-} */
+}
 
-#drop {
+#drop-nightclub {
     position: fixed;
-    left: 40%;
+    left: 240px;
+    top: 10px;
+}
+
+#drop-jazz {
+    position: fixed;
+    left: 332px;
+    top: 10px;
+}
+
+#drop-cafe {
+    position: fixed;
+    left: 388px;
     top: 10px;
 }
 
@@ -28,9 +40,6 @@ html, body {
     left: 0;
     z-index: 1;
     display: none;
-    /* position: fixed;
-    left: 0;
-    top: 0; */
 }
 
 
@@ -44,8 +53,6 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    /* height: 100%;
-    width: 100%; */
     z-index: 1;
     display: none;
 }
