@@ -1,14 +1,15 @@
 var map, infoWindow, pos;
 var user;
 var all = [];
-
+var directionsRenderer
+var directionsService
 // var user = {
 //   name: "Sailor Moon",
 //   email: "s@s.com",
 //   preference: "jazz"
 // }
 
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function() {
   $.get("/api/business").then(function(data) {
     for (i=0; i<data.length; i++){
       var place = {
@@ -205,6 +206,9 @@ function initMap() {
   } else {
     handleLocationError(false, infoWindow, map.getCenter());
   }
+  
+  directionsService = new google.maps.DirectionsService();
+  directionsRenderer = new google.maps.DirectionsRenderer();
 
 }
 
@@ -261,37 +265,33 @@ function dropAll() {
 
 function dropNightclub(){
   clearMarkers();
-  for (i=0; i<all.length; i++){
-    if (all[i].type === "nightclub"){
-      addMarkerWithTimeout({...all[i],i}, i * 200);
-    }
+  const clubs = all.filter(a=> a.type === 'nightclub');
+  for (i=0; i<clubs.length; i++){
+    addMarkerWithTimeout({...clubs[i],i}, i * 200);
   }
 }
 
 function dropJazz(){
   clearMarkers();
-  for (i=0; i<all.length; i++){
-    if (all[i].type === "jazz"){
-      addMarkerWithTimeout({...all[i],i}, i * 200);
-    }
+  const jazz = all.filter(a=> a.type=== "jazz")
+  for (i=0; i<jazz.length; i++){
+      addMarkerWithTimeout({...jazz[i],i}, i * 200);
   }
 }
 
 function dropCafe(){
   clearMarkers();
-  for (i=0; i<all.length; i++){
-    if (all[i].type === "cafe"){
-      addMarkerWithTimeout({...all[i],i}, i * 200);
+  const cafe = all.filter(a=> a.type==="cafe")
+  for (i=0; i<cafe.length; i++){
+      addMarkerWithTimeout({...cafe[i],i}, i * 200);
     }
-  }
 }
 
 
 
 // directions
 function calculateAndDisplayRoute(destination = {lat: 34.1020, lng: -118.3209}) {
-  var directionsService = new google.maps.DirectionsService();
-  var directionsRenderer = new google.maps.DirectionsRenderer();
+  
   directionsRenderer.setMap(map);
   directionsService.route(
       {
