@@ -1,61 +1,71 @@
 var map, infoWindow, pos;
-// var user;
+var user;
+var all = [];
 
-var user = {
-  name: "Sailor Moon",
-  email: "s@s.com",
-  preference: "jazz"
-}
+// var user = {
+//   name: "Sailor Moon",
+//   email: "s@s.com",
+//   preference: "jazz"
+// }
 
 $(document).ready(function () {
-    // $.get("/api/venues").then(function(data) {
-  //   for (i=0; i<data.length; i++){
-  //     all.push(data[i])
-  //   }
-  // });
+  $.get("/api/business").then(function(data) {
+    for (i=0; i<data.length; i++){
+      var place = {
+        name: data[i].name,
+        type: data[i].type,
+        address: data[i].address,
+        coords: { lat: data[i].lat, lng: data[i].lng }
+      };
+      all.push(place);
+    };
+    console.log(all);
+  });
 
-  // $.get("/api/user/:id").then(function(data) {
-  //     user = data;
-  // });
+  $.get("/api/user").then(function(data) {
+      user = data;
+      console.log(user);
 
-  initMap();
-  defaultMarkers();
+      initMap();
+      defaultMarkers();
+  });
+
 });
 
 var markers = [];
 
-var all = [
-  {
-    name: "Exchange LA",
-    type: "nightclub",
-    coords: {lat: 34.063900, lng: -118.360200},
-  },
-  {
-    name: "Academy LA",
-    type: "nightclub",
-    coords: { lat: 34.1020, lng: -118.3209 },
-  },
-  {
-    name: "Vibrato Grill Jazz",
-    type: "jazz",
-    coords: { lat: 34.127257, lng: -118.4457937 },
-  },
-  {
-    name: "BlueWhale",
-    type: "jazz",
-    coords: { lat: 34.0499, lng: -118.2421 },
-  },
-  {
-    name: "Pips On Labrea",
-    type: "jazz",
-    coords: { lat: 34.0485, lng: -118.3442 },
-  },
-  {
-    name: "Perry's Beach Cafe",
-    type: "cafe",
-    coords: { lat: 34.0157309, lng: -118.5015921 },
-  },
-];
+// var all = [
+//   {
+//     name: "Exchange LA",
+//     type: "nightclub",
+//     coords: {lat: 34.063900, lng: -118.360200},
+//   },
+//   {
+//     name: "Academy LA",
+//     type: "nightclub",
+//     coords: { lat: 34.1020, lng: -118.3209 },
+//   },
+//   {
+//     name: "Vibrato Grill Jazz",
+//     type: "jazz",
+//     coords: { lat: 34.127257, lng: -118.4457937 },
+//   },
+//   {
+//     name: "BlueWhale",
+//     type: "jazz",
+//     coords: { lat: 34.0499, lng: -118.2421 },
+//   },
+//   {
+//     name: "Pips On Labrea",
+//     type: "jazz",
+//     coords: { lat: 34.0485, lng: -118.3442 },
+//   },
+//   {
+//     name: "Perry's Beach Cafe",
+//     type: "cafe",
+//     coords: { lat: 34.0157309, lng: -118.5015921 },
+//   },
+// ];
 
 // var beverlyHills = {lat: 34.063900, lng: -118.360200};
 // var space = { lat: 29.5602853, lng: -95.0853914 };
@@ -73,7 +83,7 @@ var icons = {
 };
 
 
-// initiate styled map
+// initiate styled map with user location
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
@@ -220,7 +230,7 @@ function addMarkerWithTimeout(venue, timeout) {
     })
     google.maps.event.addListener(newMarker, "click", function(){
       infoWindow.setContent(
-        `<div id=${venue.i}><h5 id='title'> ${venue.name} \n </h5> <p>Type: ${venue.type} \n</p> <p>Position: ${newMarker.position}\n</p> <button class='btn btn-dark btn-sm pano'>TELEPORT</button> &nbsp; <button class='btn btn-dark btn-sm directions'>Directions</button></div>`);
+        `<div id=${venue.i}><h5 id='title'> ${venue.name} \n </h5> <p>Type: ${venue.type} \n</p> <p>Address: ${venue.address}\n</p> <button class='btn btn-dark btn-sm pano'>TELEPORT</button> &nbsp; <button class='btn btn-dark btn-sm directions'>Directions</button></div>`);
       infoWindow.open(map,newMarker)
     })
     markers.push(newMarker);
