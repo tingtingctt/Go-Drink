@@ -81,7 +81,7 @@ var icons = {
   cafe: {
     icon: "TT_images/cafe.png"
   },
-  bar: {
+  lounge: {
     icon: "TT_images/lounge.png"
   },
   sports: {
@@ -311,7 +311,7 @@ function dropSports(){
 
 function dropLounge(){
   clearMarkers();
-  const lounge = all.filter(a=> a.type==="bar")
+  const lounge = all.filter(a=> a.type==="lounge")
   for (i=0; i<lounge.length; i++){
       addMarkerWithTimeout({...lounge[i],i}, i * 200);
     }
@@ -367,6 +367,11 @@ function panorama(location) {
 function back(){
     $("#map").attr("style", "display:block");
     $("#street-view").attr("style", "display:none");
+}
+
+// direction off
+function directionOff(){
+  directionsRenderer.setMap(null);
 }
 
 

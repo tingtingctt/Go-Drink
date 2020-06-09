@@ -16,6 +16,12 @@ html, body {
     color: beige;
 }
 
+#direction-off {
+    position: fixed;
+    right: 130px;
+    top: 10px;
+}
+
 #drop-all {
     position: fixed;
     left: 200px;
