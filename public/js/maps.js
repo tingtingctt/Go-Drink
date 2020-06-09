@@ -233,7 +233,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 // drop markers
 function addMarkerWithTimeout(venue, timeout) {
-  console.log(venue)
+  console.log(venue);
   window.setTimeout(function() {
     const newMarker = new google.maps.Marker({
       position: venue.coords,
@@ -243,7 +243,13 @@ function addMarkerWithTimeout(venue, timeout) {
     })
     google.maps.event.addListener(newMarker, "click", function(){
       infoWindow.setContent(
-        `<div id=${venue.name}><h5 id='title'> ${venue.name} \n </h5> <p>Type: ${venue.type} \n</p> <p>Address: ${venue.address}\n</p> <button class='btn btn-dark btn-sm pano'>TELEPORT</button> &nbsp; <button class='btn btn-dark btn-sm directions'>Directions</button></div>`);
+        `<div data-name="${venue.name}">
+          <h5 id='title'> ${venue.name} \n </h5> 
+          <p>Type: ${venue.type} \n</p> 
+          <p>Address: ${venue.address}\n</p> 
+          <button class='btn btn-dark btn-sm pano'>TELEPORT</button> &nbsp; 
+          <button class='btn btn-dark btn-sm directions'>Directions</button>
+        </div>`);
       infoWindow.open(map,newMarker)
     })
     markers.push(newMarker);
@@ -364,21 +370,27 @@ function back(){
 }
 
 
-
 // onclick events
 $(document).on('click', ".pano", function(){
-  panorama(all[$(this).parent('div').attr("id")].coords)
+  let j = 0;
+  for (i=0; i<all.length; i++){
+    if (all[i].name === $(this).parent('div').attr("data-name")){
+      j = i;
+    }
+  };
+  panorama(all[j].coords);
+  // panorama(all[$(this).parent('div').attr("id")].coords);
 });
 
 $(document).on('click', ".directions", function(){
   let j = 0;
   for (i=0; i<all.length; i++){
-    if (all[i].name === $(this).parent('div').attr("id")){
+    if (all[i].name === $(this).parent('div').attr("data-name")){
       j = i;
     }
-  }
+  };
   calculateAndDisplayRoute(all[j].coords);
-  // calculateAndDisplayRoute(all[$(this).parent('div').attr("id")].coords)
+  // calculateAndDisplayRoute(all[$(this).parent('div').attr("id")].coords);
 });
 
 $("#cheesy").on("click", function () {
