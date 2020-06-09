@@ -80,6 +80,15 @@ var icons = {
   },
   cafe: {
     icon: "TT_images/cafe.png"
+  },
+  bar: {
+    icon: "TT_images/lounge.png"
+  },
+  sports: {
+    icon: "TT_images/sports.png"
+  },
+  beer: {
+    icon: "TT_images/beer.png"
   }
 };
 
@@ -87,7 +96,7 @@ var icons = {
 // initiate styled map with user location
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14,
+    zoom: 11,
     // center: beverlyHills, 
     styles: [
       { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
@@ -234,7 +243,7 @@ function addMarkerWithTimeout(venue, timeout) {
     })
     google.maps.event.addListener(newMarker, "click", function(){
       infoWindow.setContent(
-        `<div id=${venue.i}><h5 id='title'> ${venue.name} \n </h5> <p>Type: ${venue.type} \n</p> <p>Address: ${venue.address}\n</p> <button class='btn btn-dark btn-sm pano'>TELEPORT</button> &nbsp; <button class='btn btn-dark btn-sm directions'>Directions</button></div>`);
+        `<div id=${venue.name}><h5 id='title'> ${venue.name} \n </h5> <p>Type: ${venue.type} \n</p> <p>Address: ${venue.address}\n</p> <button class='btn btn-dark btn-sm pano'>TELEPORT</button> &nbsp; <button class='btn btn-dark btn-sm directions'>Directions</button></div>`);
       infoWindow.open(map,newMarker)
     })
     markers.push(newMarker);
@@ -249,11 +258,10 @@ function clearMarkers() {
 }
 
 function defaultMarkers(){
-  for (i=0; i<all.length; i++){
-    if (user.preference === all[i].type){
-      addMarkerWithTimeout({...all[i],i}, i * 200);
+  const userPref = all.filter(a => a.type === user.preference);
+  for (i=0; i<userPref.length; i++){
+      addMarkerWithTimeout({...userPref[i],i}, i * 200);
     }
-  }
 }
 
 function dropAll() {
@@ -284,6 +292,30 @@ function dropCafe(){
   const cafe = all.filter(a=> a.type==="cafe")
   for (i=0; i<cafe.length; i++){
       addMarkerWithTimeout({...cafe[i],i}, i * 200);
+    }
+}
+
+function dropSports(){
+  clearMarkers();
+  const sports = all.filter(a=> a.type==="sports")
+  for (i=0; i<sports.length; i++){
+      addMarkerWithTimeout({...sports[i],i}, i * 200);
+    }
+}
+
+function dropLounge(){
+  clearMarkers();
+  const lounge = all.filter(a=> a.type==="bar")
+  for (i=0; i<lounge.length; i++){
+      addMarkerWithTimeout({...lounge[i],i}, i * 200);
+    }
+}
+
+function dropBeer(){
+  clearMarkers();
+  const beer = all.filter(a=> a.type==="beer")
+  for (i=0; i<beer.length; i++){
+      addMarkerWithTimeout({...beer[i],i}, i * 200);
     }
 }
 
@@ -339,7 +371,14 @@ $(document).on('click', ".pano", function(){
 });
 
 $(document).on('click', ".directions", function(){
-  calculateAndDisplayRoute(all[$(this).parent('div').attr("id")].coords)
+  let j = 0;
+  for (i=0; i<all.length; i++){
+    if (all[i].name === $(this).parent('div').attr("id")){
+      j = i;
+    }
+  }
+  calculateAndDisplayRoute(all[j].coords);
+  // calculateAndDisplayRoute(all[$(this).parent('div').attr("id")].coords)
 });
 
 $("#cheesy").on("click", function () {

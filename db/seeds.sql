@@ -1,3 +1,4 @@
+
 USE godo;
 -- SELECT * FROM godo.Businesses;
 -- SELECT * FROM Businesses
@@ -49,3 +50,4 @@ INSERT INTO Businesses (name, type, address, lat, lng, UserId) VALUES ("6th & La
 INSERT INTO Businesses (name, type, address, lat, lng, UserId) VALUES ("Mumford Brewing", "beer", "416 Boyd St, Los Angeles, CA 90013", 34.046081, -118.242113, 1);
 INSERT INTO Businesses (name, type, address, lat, lng, UserId) VALUES ("Karl Strauss Brewing Company", "beer", "600 Wilshire Blvd #100, Los Angeles, CA 90017", 34.047930, -118.256286, 1);
 INSERT INTO Businesses (name, type, address, lat, lng, UserId) VALUES ("The Craftsman Bar and Kitchen", "beer", "119 Broadway, Santa Monica, CA 90401", 34.013294, -118.496029, 1);
+
