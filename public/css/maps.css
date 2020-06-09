@@ -105,28 +105,28 @@ html, body {
 #partyOn {
     position: fixed;
     top: 95%;
-    left: 5px;
+    left: 173px;
     z-index: 2;
 }
 
 #beachOn {
     position: fixed;
     top: 95%;
-    left: 60px;
+    left: 56px;
     z-index: 2;
 }
 
 #cheesy {
     position: fixed;
     top: 95%;
-    left: 105px;
+    left: 103px;
     z-index: 2;
 }
 
 #partyOff {
     position: fixed;
     top: 95%;
-    left: 175px;
+    left: 5px;
     z-index: 2;
 }
 
