@@ -9,11 +9,11 @@ html, body {
     padding: 0;
 }
 
-#direction {
+/* #direction {
     position: fixed;
     left: 50%;
     top: 10px;
-}
+} */
 
 #drop {
     position: fixed;
@@ -57,32 +57,38 @@ html, body {
     z-index: 2;
 }
 
+#back {
+    position: fixed;
+    left: 50%;
+    top: 10px;
+    z-index: 2;
+}
+
 #partyOn {
     position: fixed;
     top: 95%;
-    left: 20px;
+    left: 5px;
     z-index: 2;
 }
 
 #beachOn {
     position: fixed;
     top: 95%;
-    left: 40px;
+    left: 60px;
     z-index: 2;
 }
-
 
 #cheesy {
     position: fixed;
     top: 95%;
-    left: 60px;
+    left: 105px;
     z-index: 2;
 }
 
 #partyOff {
     position: fixed;
     top: 95%;
-    left: 80px;
+    left: 175px;
     z-index: 2;
 }
 

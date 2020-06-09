@@ -232,7 +232,8 @@ function addMarkerWithTimeout(venue, timeout) {
       animation: google.maps.Animation.DROP
     })
     google.maps.event.addListener(newMarker, "click", function(){
-      infoWindow.setContent(`<div id=${venue.i}><h1 id='title'>position - ${newMarker.position}\n name - ${venue.name} \n type - ${venue.type}</h1><button class='btn btn-primary btn-lg pano'>TELEPORT</button><button class='btn btn-primary btn-lg directions'>Directions</button></div>`);
+      infoWindow.setContent(
+        `<div id=${venue.i}><h5 id='title'> ${venue.name} \n </h5> <p>Type: ${venue.type} \n</p> <p>Position: ${newMarker.position}\n</p> <button class='btn btn-dark btn-sm pano'>TELEPORT</button> &nbsp; <button class='btn btn-dark btn-sm directions'>Directions</button></div>`);
       infoWindow.open(map,newMarker)
     })
     markers.push(newMarker);
@@ -301,6 +302,16 @@ function panorama(location) {
     });
 }
 
+
+function back(){
+    $("#map").attr("style", "display:block");
+    $("#street-view").attr("style", "display:none");
+}
+
+// $("#back").on("click", function () {
+//   $("#map").attr("style", "display:block");
+//   $("#street-view").attr("style", "display:none");
+// });
 
 
 $("#direction").on("click", function () {
