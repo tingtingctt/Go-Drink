@@ -24,19 +24,37 @@ html, body {
 
 #drop-nightclub {
     position: fixed;
-    left: 240px;
+    left: 239px;
     top: 10px;
 }
 
 #drop-jazz {
     position: fixed;
-    left: 332px;
+    left: 330px;
     top: 10px;
 }
 
 #drop-cafe {
     position: fixed;
-    left: 388px;
+    left: 385px;
+    top: 10px;
+}
+
+#drop-beer {
+    position: fixed;
+    left: 440px;
+    top: 10px;
+}
+
+#drop-sports {
+    position: fixed;
+    left: 495px;
+    top: 10px;
+}
+
+#drop-lounge {
+    position: fixed;
+    left: 563px;
     top: 10px;
 }
 

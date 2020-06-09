@@ -1,17 +1,17 @@
 SELECT * FROM godo.Businesses;
+DROP table Businesses;
+
 USE godo;
+
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Exchange LA","nightclub","618 S Spring St, Los Angeles, CA 90014",34.063900,-118.360200,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Academy LA","nightclub","618 S Spring St, Los Angeles, CA 90014",34.1020,-118.3209,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Vibrato Grill Jazz","jazz","618 S Spring St, Los Angeles, CA 90014",34.127257,-118.4457937,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("BlueWhale","jazz","618 S Spring St, Los Angeles, CA 90014",34.0499,-118.2421 ,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Pips On Labrea","jazz","618 S Spring St, Los Angeles, CA 90014",34.0485,-118.3442,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Perry's Beach Cafe","cafe","618 S Spring St, Los Angeles, CA 90014",34.0157309,-118.5015921,1);
--- INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Exchange LA","nightclub","618 S Spring St, Los Angeles, CA 90014",34.063900,-118.360200,1)
--- INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Bar Toscana","cafe","618 S Spring St, Los Angeles, CA 90014",34.0157309,-118.5015921,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("The Craftsman Bar and Kitchen","beer","119 Broadway, Santa Monica, CA 90401",34.0132933,-118.4960296,1);
-INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("The Misfit Restaurant + Bar","225 Santa Monica Blvd, Santa Monica, CA 90401",34.0154445,-118.4966717,1);
+INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("The Misfit Restaurant", "Bar","225 Santa Monica Blvd, Santa Monica, CA 90401",34.0154445,-118.4966717,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("The Venice Beach Bar","cafe","323 Ocean Front Walk, Venice, CA 90291",33.9941151,-118.4798821,1);
--- INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Bar Toscana","cafe","618 S Spring St, Los Angeles, CA 90014",34.0157309,-118.5015921,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Playhouse Hollywood","nightclub","1700-1726 Wilcox Ave, Los Angeles, CA 90028",34.101758,-118.330971,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Lure Nightclub","nightclub","36370 Sunset Blvd Suite 405, Los Angeles, CA 90028",34.097383,-118.328590,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Bar Sinister","nightclub","1652 N Cherokee Ave, Los Angeles, CA 90028",34.101328,-118.334970,1);
@@ -44,5 +44,6 @@ INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Broxton B
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("6th & La Brea Brewery & Restaurant","beer","600 South La Brea Ave, Los Angeles, CA 90036",34.064736,-118.343663,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Mumford Brewing","beer","416 Boyd St, Los Angeles, CA 90013",34.046081,-118.242113,1);
 INSERT INTO Businesses (name, type, address, lat, lng,UserId) VALUES ("Karl Strauss Brewing Company","beer","600 Wilshire Blvd #100, Los Angeles, CA 90017",34.047972,-118.256154,1);
--- SELECT * FROM Businesses
+
+SELECT * FROM Businesses;
 SELECT * FROM Users;
