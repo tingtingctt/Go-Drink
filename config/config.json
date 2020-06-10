@@ -15,10 +15,11 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "si8p43ox0p3e0wyl",
-    "password": "wnhcc3zo1gjkvoyz",
-    "database": "b64q7no7dq3knyrs",
-    "host": "sq65ur5a5bj7flas.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "use_env_variable": "JAWSDB_URL",
+    "username": "MYSQL_USERNAME",
+    "password": "MYSQL_PASSWORD",
+    "database": "MYSQL_DATABASE",
+    "host": "MYSQL_HOST",
     "dialect": "mysql",
     "operatorsAliases": false
   }
