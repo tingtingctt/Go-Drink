@@ -11,18 +11,18 @@ Our app originated from a simple idea which is to create a customized mapping se
 
 
 ## Front End Technologies
-HTML
-CSS
-Javascript
-Google Maps Api
-* Directions
-* Panorama
-* Markers
-* Styling
-HTML 5 Canvas
-CSS Key Frames 
-Scalable Vector Graphics (SVG)
-Photoshop
+* HTML
+* CSS
+* Javascript
+* Google Maps Api
+** Directions
+** Panorama
+** Markers
+** Styling
+* HTML 5 Canvas
+* CSS Key Frames 
+* Scalable Vector Graphics (SVG)
+* Photoshop
 
 
 ## Database
@@ -30,11 +30,11 @@ We used Sequelize to manage our database. There are currently 3 models: Business
 
 
 ## Future Development
-Use Google Locations API to populate our database
-Save feature where users can store favorite locations
-Price range
-Location calendar
-Full fledged lifestyle app (beauty, fitness, food, etc)
+* Use Google Locations API to populate our database
+* Save feature where users can store favorite locations
+* Price range
+* Location calendar
+* Full fledged lifestyle app (beauty, fitness, food, etc)
 
 
 
