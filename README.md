@@ -2,6 +2,9 @@
 A Custom Lifestyle Mapping App
 
 
+Disclaimer: The front page is intentionally left un-styled, at the current stage, as a statement to the political impasse and the overall troubled state of our country.
+
+
 ## Deployed App
 https://go-drink-la.herokuapp.com/
 
